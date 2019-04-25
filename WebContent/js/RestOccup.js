@@ -77,19 +77,62 @@ function verifierEtatTable(table)
 	
 	if(table.id_Etats_Tables == 1)
 	{
-		couleurTable = '<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableVerte.png">';
+		couleurTable = '<div class="card-header">Table N°' + table.id + '</div>'
+			+'<div class="card-body">'
+			+'<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableVerte.png">'
+			+'</div>'
+			+'<div class="card-footer text-muted">'
+			+'Libre'
+			+'</div>';
 	}
 	else if(table.id_Etats_Tables == 2)
 	{
-		couleurTable = '<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableGrise.png">';
+		$.ajax({
+	    	type:"GET",
+			url:"http://localhost:8080/ProjetJEE/rest/RestService/reservation/"+table.id,
+			dataType : 'text',
+			success : function(resultat, statut)
+			{
+				console.log(resultat);
+				couleurTable = '<div class="card-header">Table N°' + table.id + '</div>'
+				+'<div class="card-body">'
+				+'<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableGrise.png">'
+				+'</div>'
+				+'<div class="card-footer text-muted">'
+				+'Réservée au nom de '+ resultat
+				+'</div>';
+		    },
+		    error : function(resultat, statut, erreur)
+		    {
+		    	console.log(erreur);
+		    }
+	    });
+		
+		/*couleurTable = '<div class="card-header">Table N°' + table.id + '</div>'
+			+'<div class="card-body">'
+			+'<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableGrise.png">'
+			+'</div>'
+			+'<div class="card-footer text-muted">'
+			+'Réservée au nom de '+ getNomReserv(table.id)
+			+'</div>';	*/	
 	}
 	
 	return couleurTable;
 }
 
+/*function getNomReserv(id) 
+{
+	$.ajax({
+    	type:"GET",
+		url:"http://localhost:8080/ProjetJEE/rest/RestService/reservation/"+id,
+		dataType : 'text',
+		success : verifierEtatTable
+    });	
+}*/
+
 function ajouterTableRennes(table)
 {
-	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 imgTable '+ table.id_Etats_Tables +'">'
+	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 imgTable card '+ table.id_Etats_Tables +'">'
 		+ verifierEtatTable(table);
 		+ '</div>';
 	
@@ -98,7 +141,7 @@ function ajouterTableRennes(table)
 
 function ajouterTableNantes(table)
 {
-	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 imgTable'+ table.id_Etats_Tables +'">'
+	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 imgTable card '+ table.id_Etats_Tables +'">'
 		+ verifierEtatTable(table);
 		+ '</div>';
 	
