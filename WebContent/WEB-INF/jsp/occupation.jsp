@@ -25,7 +25,7 @@
 				
 			</div>
 		</div>
-		<!-- Modal -->
+		<!-- Modal form-->
 		<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
@@ -54,6 +54,39 @@
 		      <div class="modal-footer">
 		        <button type="button" id="fermer" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
 		        <button type="button" id="submit" class="btn btn-primary">Réserver</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		<!-- Modal confirmer annulation réservation-->
+		<div class="modal fade" id="modalForm2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Réservation</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <form>
+				  <div class="form-group">
+				    <label for="nom">Nom de réservation</label>
+				    <input type="text" id="nom2" class="form-control" placeholder="Nom de la personne qui réserve" readonly>
+				  </div>
+				  <div class="form-group">
+				    <label for="nbrePersonne">Nombre de personne</label>
+				    <input type="number" class="form-control" id="nbrePersonne2" placeholder="Nombre de personne" readonly>
+				  </div>
+				  <div class="form-group">
+				    <label for="telPersonne">Numéro de téléphone</label>
+				    <input type="tel" class="form-control" id="telPersonne2" placeholder="Téléphone de la personne qui réserve" readonly>
+				  </div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" id="fermer2" class="btn btn-secondary" data-dismiss="modal">Garder</button>
+		        <button type="button" id="submit2" class="btn btn-primary">Annuler cette réservation</button>
 		      </div>
 		    </div>
 		  </div>

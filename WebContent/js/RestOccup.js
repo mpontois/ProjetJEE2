@@ -67,7 +67,25 @@ function afficherForm(id)
 	}
 	else if($("#"+id).hasClass('2'))
 	{
-	    console.log('Réservée');
+		var idTable = id;
+		
+		$('#modalForm2').modal('show');
+		
+		$.ajax({
+	    	type:"GET",
+			url:"http://localhost:8080/ProjetJEE/rest/RestService/reservation/"+idTable,
+			dataType : 'JSON',
+			success : function(resultat, statut)
+			{
+				$('#nom2').val(resultat.nom);
+				$('#nbrePersonne2').val(resultat.nbPersonnes);
+				$('#telPersonne2').val(resultat.telephone_reserv);
+		    },
+		    error : function(resultat, statut, erreur)
+		    {
+		    	console.log(erreur);
+		    }
+	    });
 	}
 }
 
@@ -87,7 +105,7 @@ function verifierEtatTable(table)
 	}
 	else if(table.id_Etats_Tables == 2)
 	{
-		$.ajax({
+		/*$.ajax({
 	    	type:"GET",
 			url:"http://localhost:8080/ProjetJEE/rest/RestService/reservation/"+table.id,
 			dataType : 'text',
@@ -106,15 +124,15 @@ function verifierEtatTable(table)
 		    {
 		    	console.log(erreur);
 		    }
-	    });
+	    });*/
 		
-		/*couleurTable = '<div class="card-header">Table N°' + table.id + '</div>'
+		couleurTable = '<div class="card-header">Table N°' + table.id + '</div>'
 			+'<div class="card-body">'
 			+'<img class="'+ table.id_Etats_Tables+'" id="'+ table.id +'" src="img/tableGrise.png">'
 			+'</div>'
 			+'<div class="card-footer text-muted">'
-			+'Réservée au nom de '+ getNomReserv(table.id)
-			+'</div>';	*/	
+			+'Réservée'
+			+'</div>';	
 	}
 	
 	return couleurTable;
@@ -132,7 +150,7 @@ function verifierEtatTable(table)
 
 function ajouterTableRennes(table)
 {
-	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 imgTable card '+ table.id_Etats_Tables +'">'
+	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 my-3 imgTable card '+ table.id_Etats_Tables +'">'
 		+ verifierEtatTable(table);
 		+ '</div>';
 	
@@ -141,7 +159,7 @@ function ajouterTableRennes(table)
 
 function ajouterTableNantes(table)
 {
-	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 imgTable card '+ table.id_Etats_Tables +'">'
+	var afficherTable = '<div onclick="afficherForm('+table.id+');" id="'+ table.id +'" class="col-3 p-0 my-3 imgTable card '+ table.id_Etats_Tables +'">'
 		+ verifierEtatTable(table);
 		+ '</div>';
 	
